@@ -22,6 +22,10 @@ project(Enzo-E VERSION 0.9.0 LANGUAGES C CXX Fortran)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+#### Kokkos recommendation
+set(CMAKE_CXX_EXTENSION OFF)
+### end Kokkos
+
 # Don't allow in-source builds
 file(TO_CMAKE_PATH "${PROJECT_BINARY_DIR}/CMakeLists.txt" LOC_PATH)
 if(EXISTS "${LOC_PATH}")
@@ -46,6 +50,14 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS
     "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
 endif()
+
+
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/Kokkos Kokkos)
+
+#if(Kokkos_ENABLE_CUDA)
+#  set(CMAKE_CXX_COMPILER ~/data/enzo-kokkos/enzo-e/external/Kokkos/bin/nvcc_wrapper)
+#endif()
+
 
 find_package(Charm REQUIRED)
 # Link executables with the charmc wrapper
@@ -91,6 +103,7 @@ target_link_libraries(HDF5_C INTERFACE ${HDF5_C_LIBRARIES})
 target_compile_definitions(HDF5_C INTERFACE ${HDF5_C_DEFINITIONS})
 target_include_directories(HDF5_C INTERFACE ${HDF5_C_INCLUDE_DIRS})
 
+target_link_libraries(HDF5_C INTERFACE Kokkos::kokkos)
 
 set(Cello_TARGET_LINK_OPTIONS "")
 
@@ -277,15 +290,20 @@ endif()
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/External)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+
+#include_directories(${Kokkos_SOURCE_DIR})
+#target_link_libraries(Kokkos::kokkos)
 add_subdirectory(src/Cello)
 add_subdirectory(src/Enzo)
 add_subdirectory(src/External)
 
+
+
 include(CTest)
-find_package(Python3 REQUIRED)
+#find_package(Python3 REQUIRED)
 # Ensure all required packages are present
-include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/PythonModuleCheck.cmake)
-required_python_modules_found("yt")
+#include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/PythonModuleCheck.cmake)
+#required_python_modules_found("yt")
 
 add_subdirectory(test)
 

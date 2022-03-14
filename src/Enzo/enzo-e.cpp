@@ -36,7 +36,7 @@
 #include "main.hpp"
 
 #include "charm_enzo.hpp"
-
+#include <Kokkos_Core.hpp>
 // The following needs to be included once and only once
 // This may not be the perfect place for this, but it is when it is included in
 // multiple object files
