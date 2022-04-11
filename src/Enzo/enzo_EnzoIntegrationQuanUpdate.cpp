@@ -1,3 +1,4 @@
+/*
 // See LICENSE_CELLO file for license and copyright information
 
 /// @file     enzo_EnzoIntegrableUpdate.cpp
@@ -288,7 +289,7 @@ void EnzoIntegrableUpdate::update_passive_scalars_
     }
   }
 }
-/*
+*/ 
 
 // See LICENSE_CELLO file for license and copyright information
 
@@ -532,4 +533,4 @@ void EnzoIntegrationQuanUpdate::update_passive_scalars_
 
 }
 
-*/
+

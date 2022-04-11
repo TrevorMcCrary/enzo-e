@@ -129,7 +129,10 @@ PARALLEL_MAIN_BEGIN
     (parameter_file, strlen(parameter_file)+1);
   // --------------------------------------------------
 
+  Kokkos::initialize();
+
 }
+
 
 PARALLEL_MAIN_END
 

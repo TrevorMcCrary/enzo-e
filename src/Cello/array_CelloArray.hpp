@@ -11,6 +11,8 @@
 #include <limits>
 #include <memory>
 
+//include "kokkos_defs.hpp"
+
 #ifndef ARRAY_CELLO_ARRAY_HPP
 #define ARRAY_CELLO_ARRAY_HPP
 

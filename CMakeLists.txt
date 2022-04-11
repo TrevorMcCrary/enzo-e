@@ -52,7 +52,6 @@ if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
 endif()
 
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/Kokkos Kokkos)
 
 #if(Kokkos_ENABLE_CUDA)
 #  set(CMAKE_CXX_COMPILER ~/data/enzo-kokkos/enzo-e/external/Kokkos/bin/nvcc_wrapper)
@@ -103,7 +102,9 @@ target_link_libraries(HDF5_C INTERFACE ${HDF5_C_LIBRARIES})
 target_compile_definitions(HDF5_C INTERFACE ${HDF5_C_DEFINITIONS})
 target_include_directories(HDF5_C INTERFACE ${HDF5_C_INCLUDE_DIRS})
 
-target_link_libraries(HDF5_C INTERFACE Kokkos::kokkos)
+if(NOT TARGET Kokkos::kokkos)
+  add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/Kokkos Kokkos)
+endif()
 
 set(Cello_TARGET_LINK_OPTIONS "")
 

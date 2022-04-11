@@ -1,6 +1,8 @@
 #ifndef ENZO_TYPEDEFS_HPP
 #define ENZO_TYPEDEFS_HPP
 
+#include "array_CelloArray.hpp"
+
 //----------------------------------------------------------------------
 // TYPEDEFS
 //----------------------------------------------------------------------
